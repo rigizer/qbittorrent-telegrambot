@@ -1,10 +1,11 @@
 FROM python:3.12
 
-COPY . /app
-WORKDIR /app
+EXPOSE 8080
 
+COPY ./requirements.txt /app/requirements.txt
+WORKDIR /app
 RUN pip install -r requirements.txt
 
-EXPOSE 8080
+COPY . /app
 
 CMD ["python", "/app/app.py"]
