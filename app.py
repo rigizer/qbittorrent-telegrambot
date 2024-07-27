@@ -5,6 +5,10 @@ from datetime import datetime
 import os
 import telegram             # pip install python-telegram-bot
 import asyncio
+import platform
+
+if platform.system() == 'Windows':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 SERVER_NAME = os.environ['SERVER_NAME']
 TELEGRAM_TOKEN = os.environ['TELEGRAM_TOKEN']
