@@ -26,8 +26,14 @@ def send_message():
     path: str = request.args.get('path')
 
     content = '<b>[Qbittorrent]</b> 다운로드 완료\n[SERVER] {}\n\n이름: {}\n크기: {}\n저장경로 {}\n완료시간: {}'.format(SERVER_NAME, name, size, path, time)
-    asyncio.run(bot.sendMessage(chat_id=TELEGRAM_CHATID, text=content, parse_mode='html'))
-
+    
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(bot.sendMessage(chat_id=TELEGRAM_CHATID, text=content, parse_mode='html'))
+    finally:
+        loop.close()
+    
     return 'success'
 
 def size_convert(size):
